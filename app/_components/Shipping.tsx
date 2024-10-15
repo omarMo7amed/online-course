@@ -15,7 +15,10 @@ export default function Shipping() {
       </Link>
 
       {cartLength > 0 && (
-        <span className="absolute text-rose-200 -top-5 -left-3 bg-rose-800 flex items-center justify-center text-xs w-5 h-5 rounded-full">
+        <span
+          onClick={() => setCartLength(0)}
+          className="absolute text-rose-200 -top-5 -left-3 bg-rose-800 flex items-center justify-center text-xs w-5 h-5 rounded-full"
+        >
           {cartLength}
         </span>
       )}
