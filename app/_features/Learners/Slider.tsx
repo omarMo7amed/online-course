@@ -1,8 +1,13 @@
 "use client";
-import { useState, useMemo } from "react";
-import Learner from "./Learner";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
+import { useMemo } from "react";
+import dynamic from "next/dynamic";
+
+const CustomSlider = dynamic(() => import("@/app/_components/Slider"), {
+  ssr: false,
+});
+const Learner = dynamic(() => import("./Learner"), {
+  ssr: false,
+});
 
 type LearnerType = {
   imgSrc: string;
@@ -18,28 +23,26 @@ const responsive = {
   superLargeDesktop: {
     breakpoint: { max: 4000, min: 1200 },
     items: 4,
-    slidesToSlide: 4,
+    slidesNumberToSlide: 4,
   },
   desktop: {
-    breakpoint: { max: 1200, min: 1024 },
+    breakpoint: { max: 1199, min: 1024 },
     items: 3,
-    slidesToSlide: 3,
+    slidesNumberToSlide: 3,
   },
   tablet: {
     breakpoint: { max: 1023, min: 768 },
     items: 2,
-    slidesToSlide: 2,
+    slidesNumberToSlide: 2,
   },
   mobile: {
     breakpoint: { max: 767, min: 320 },
     items: 1,
-    slidesToSlide: 1,
+    slidesNumberToSlide: 1,
   },
 };
 
 export default function Slider({ someLearners }: SliderProps) {
-  const [autoPlay, setAutoPlay] = useState<boolean>(true);
-
   const memoizedLearners = useMemo(() => {
     return someLearners.map((learner: LearnerType) => (
       <Learner key={learner.id} learner={learner} />
@@ -47,20 +50,6 @@ export default function Slider({ someLearners }: SliderProps) {
   }, [someLearners]);
 
   return (
-    <div
-      onMouseEnter={() => setAutoPlay(false)}
-      onMouseLeave={() => setAutoPlay(true)}
-    >
-      <Carousel
-        autoPlay={autoPlay}
-        autoPlaySpeed={3000}
-        transitionDuration={3000}
-        infinite
-        responsive={responsive}
-        className="min-h-[450px]"
-      >
-        {memoizedLearners}
-      </Carousel>
-    </div>
+    <CustomSlider responsive={responsive}>{memoizedLearners}</CustomSlider>
   );
 }

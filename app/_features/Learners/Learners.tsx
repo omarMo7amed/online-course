@@ -1,4 +1,7 @@
-import Slider from "./Slider";
+import dynamic from "next/dynamic";
+const Slider = dynamic(() => import("./Slider"), {
+  ssr: false,
+});
 
 type LearnerType = {
   imgSrc: string;
@@ -63,6 +66,7 @@ function Learners() {
         <p className="text-slate-400 mb-6">
           Hear What Our Learners Have to Say!
         </p>
+
         <Slider someLearners={someLearners} />
       </div>
     </section>

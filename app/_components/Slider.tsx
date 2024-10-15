@@ -115,14 +115,14 @@ const CustomSlider: React.FC<CustomSliderProps> = ({
       <ul
         className="flex gap-2 transition-transform duration-500 ease-in-out"
         style={{
-          transform: `translateX(-${currentIndex * 100}%)`,
+          transform: `translateX(-${currentIndex * 100.5}%)`,
         }}
       >
         {childrenArray.map((child, index) => (
           <li
             key={index}
             className="flex-shrink-0"
-            style={{ width: `${itemWidth - 8}px` }}
+            style={{ width: `${itemWidth - 6}px` }}
           >
             {child}
           </li>

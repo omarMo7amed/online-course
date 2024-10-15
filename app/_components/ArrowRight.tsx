@@ -1,3 +1,4 @@
+"use client";
 export function ArrowRight({ onClick }: { onClick: () => void }) {
   return (
     <button

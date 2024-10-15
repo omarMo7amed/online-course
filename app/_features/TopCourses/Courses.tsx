@@ -26,7 +26,7 @@ const responsive = {
     slidesNumberToSlide: 5,
   },
   desktop: {
-    breakpoint: { max: 1800, min: 1024 },
+    breakpoint: { max: 1199, min: 1024 },
     items: 4,
     slidesNumberToSlide: 4,
   },

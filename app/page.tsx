@@ -2,6 +2,7 @@ import HeroSection from "./_features/heroSection/HeroSection";
 import About from "./_features/about/About";
 import TopInstructors from "./_features/TopInstructors/TopInstructors";
 import TopCourses from "./_features/TopCourses/TopCourses";
+import Learners from "./_features/Learners/Learners";
 
 export default function Main() {
   return (
@@ -10,7 +11,7 @@ export default function Main() {
       <About />
       <TopInstructors />
       <TopCourses />
-      {/* <Learners /> */}
+      <Learners />
     </div>
   );
 }

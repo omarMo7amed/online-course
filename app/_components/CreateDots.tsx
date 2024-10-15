@@ -1,3 +1,4 @@
+"use client";
 export function CreateDots({
   length,
   currentIndex,
