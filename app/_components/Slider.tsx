@@ -74,7 +74,7 @@ const CustomSlider: React.FC<CustomSliderProps> = ({
 
   useEffect(() => {
     updateWidth();
-    updateSetSlideView(); // Update slide view immediately on mount
+    updateSetSlideView();
 
     const handleResize = () => {
       updateWidth();
