@@ -2,19 +2,29 @@
 import { useState } from "react";
 
 export default function AuthPanel() {
-  const [clicked, setIsClicked] = useState<boolean>(false);
+  const [isClicked, setIsClicked] = useState<boolean>(false);
 
   return (
     <div
       className={`bg-rose-500 absolute top-0 left-0 h-full z-10 transition-all duration-500 ease-in-out ${
-        clicked ? "w-2/5 opacity-100" : "w-full opacity-100"
+        isClicked ? "w-2/5 opacity-100" : "w-full opacity-100"
       } flex flex-col items-center justify-center rounded-tl-xl rounded-bl-xl`}
     >
       <div className={`text-center `}>
         <div
           className={`${
-            clicked ? "translate-x-0" : "-translate-x-[300%]"
-          } transition-all duration-500 max-w-[300px] `}
+            isClicked ? "opacity-0" : "opacity-100"
+          } absolute transition-all duration-200 max-w-[300px]`}
+        >
+          <h1 className="text-white font-bold text-4xl mb-8"> Welcome Back!</h1>
+          <p className="text-rose-100 text-md">
+            Ready to dive back in? Log in and continue your journey with us!
+          </p>
+        </div>
+        <div
+          className={`${
+            isClicked ? "translate-x-0" : "-translate-x-[300%]"
+          } transition-all duration-500 max-w-[300px]`}
         >
           <h1 className="text-white font-bold text-4xl mb-8">Hello, Friend!</h1>
           <p className="text-rose-100 text-md">

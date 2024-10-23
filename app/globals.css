@@ -15,3 +15,8 @@ body {
     text-wrap: balance;
   }
 }
+
+.PhoneInputInput {
+  background-color: transparent;
+  outline: none;
+}
