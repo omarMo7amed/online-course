@@ -97,7 +97,7 @@ export default function Step2() {
             },
           })}
           type="date"
-          placeholder="mm / dd / yyyy"
+          defaultValue="mm/dd/yyyy"
           className="px-6 w-64 sm:w-72 py-3 rounded-full border bg-transparent border-slate-400 focus:border-none focus:outline-none focus:ring focus:ring-rose-500 transition-all duration-300 ring-offset-1 cursor-pointer placeholder:text-sm appearance-none"
           id="birthdate"
         />
