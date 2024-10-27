@@ -12,7 +12,7 @@ export default function Steps({ currentStep, numberOfSteps }: StepsProps) {
         <li
           key={index}
           className={`${
-            index < currentStep ? "bg-rose-500" : "bg-slate-400"
+            index < currentStep ? "bg-rose-700" : "bg-slate-400"
           } h-1 rounded-lg basis-1/5`}
         ></li>
       ))}

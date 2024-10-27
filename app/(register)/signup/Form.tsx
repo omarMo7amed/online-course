@@ -5,6 +5,7 @@ import Step2 from "./Step2";
 import Step3 from "./Step3";
 import Step4 from "./Step4";
 import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 const SignUpForm = ({
   currentStep,
@@ -15,6 +16,8 @@ const SignUpForm = ({
 }) => {
   const methods = useForm();
 
+  const [direction, setDirection] = useState<number>(1);
+
   const steps = [
     <Step1 key={1} />,
     <Step2 key={2} />,
@@ -23,7 +26,7 @@ const SignUpForm = ({
   ];
 
   const handleNext = async () => {
-    //trigger to check any error exist or not
+    setDirection(1);
     const isStepValid = await methods.trigger();
     if (isStepValid) {
       setCurrentStep(currentStep + 1);
@@ -31,12 +34,24 @@ const SignUpForm = ({
   };
 
   const handleBack = () => {
+    setDirection(-1);
     setCurrentStep(currentStep - 1);
   };
 
   const onSubmit = (data: unknown) => {
     console.log("Form Submitted", data);
   };
+
+  useEffect(() => {
+    const handleKeydown = async (e: KeyboardEvent) => {
+      if (e.code === "Enter" && currentStep < steps.length - 1) {
+        await handleNext();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeydown);
+    return () => window.removeEventListener("keydown", handleKeydown);
+  }, [currentStep, steps.length]);
 
   return (
     <FormProvider {...methods}>
@@ -46,9 +61,9 @@ const SignUpForm = ({
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentStep}
-                initial={{ x: 300, opacity: 0 }}
+                initial={{ x: direction * 300, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
-                exit={{ x: -300, opacity: 0 }}
+                exit={{ x: direction * -300, opacity: 0 }}
                 transition={{ duration: 0.5, ease: "easeInOut" }}
                 className="flex flex-col items-center gap-y-5 justify-center"
               >
@@ -60,16 +75,22 @@ const SignUpForm = ({
           {/* Buttons for Navigation */}
           <div className="flex gap-4 justify-center mt-6">
             {currentStep > 0 && (
-              <FormButton type="button" onClick={handleBack}>
+              <FormButton
+                variant="secondary"
+                type="button"
+                onClick={handleBack}
+              >
                 Back
               </FormButton>
             )}
             {currentStep < steps.length - 1 ? (
-              <FormButton type="button" onClick={handleNext}>
+              <FormButton variant="primary" type="button" onClick={handleNext}>
                 Next
               </FormButton>
             ) : (
-              <FormButton type="submit">Submit</FormButton>
+              <FormButton variant="primary" type="submit">
+                Submit
+              </FormButton>
             )}
           </div>
         </div>
@@ -77,4 +98,5 @@ const SignUpForm = ({
     </FormProvider>
   );
 };
+
 export default SignUpForm;

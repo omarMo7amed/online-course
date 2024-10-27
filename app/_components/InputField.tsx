@@ -27,9 +27,7 @@ export const Input = ({
       />
 
       {/* set error */}
-      {error && (
-        <span className="text-red-300 text-xs mt-1 px-6 block">{error}</span>
-      )}
+      {error && <p className="text-red-300 text-xs mt-1 px-6">{error}</p>}
     </div>
   );
 };

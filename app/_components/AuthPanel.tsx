@@ -6,7 +6,7 @@ export default function AuthPanel() {
 
   return (
     <div
-      className={`bg-rose-500 absolute top-0 left-0 h-full z-10 transition-all duration-500 ease-in-out ${
+      className={`bg-rose-700 absolute top-0 left-0 h-full z-10 transition-all duration-500 ease-in-out ${
         isClicked ? "w-2/5 opacity-100" : "w-full opacity-100"
       } flex flex-col items-center justify-center rounded-tl-xl rounded-bl-xl`}
     >

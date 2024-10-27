@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { Input } from "@/app/_components/InputField";
+import { ReactNode, useEffect, useState } from "react";
 
 import { FieldError, useFormContext } from "react-hook-form";
 
@@ -77,30 +76,37 @@ export default function Step2() {
       </div>
 
       {/* Birthdate Input */}
-      <Input
-        register={register}
-        validation={{
-          required: "This field is required",
-          validate: {
-            isOldEnough: (value: Date) => {
-              const today = new Date();
-              const birthDate = new Date(value);
-              const age = today.getFullYear() - birthDate.getFullYear();
-              const monthDiff = today.getMonth() - birthDate.getMonth();
-              const dayDiff = today.getDate() - birthDate.getDate();
+      <div>
+        <input
+          {...register("birthdate", {
+            required: "This field is required",
+            validate: {
+              isOldEnough: (value: Date) => {
+                const today = new Date();
+                const birthDate = new Date(value);
+                const age = today.getFullYear() - birthDate.getFullYear();
+                const monthDiff = today.getMonth() - birthDate.getMonth();
+                const dayDiff = today.getDate() - birthDate.getDate();
 
-              if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
-                return age - 1 >= 16 || "You must be at least 16 years old";
-              }
+                if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+                  return age - 1 >= 16 || "You must be at least 16 years old";
+                }
 
-              return age >= 16 || "You must be at least 16 years old";
+                return age >= 16 || "You must be at least 16 years old";
+              },
             },
-          },
-        }}
-        error={errors.birthdate?.message}
-        id="birthdate"
-        type="date"
-      />
+          })}
+          type="date"
+          placeholder="mm / dd / yyyy"
+          className="px-6 w-64 sm:w-72 py-3 rounded-full border border-slate-400 focus:border-none focus:outline-none focus:ring focus:ring-rose-500 transition-all duration-300 ring-offset-1 cursor-pointer placeholder:text-sm appearance-none"
+          id="birthdate"
+        />
+        {errors.birthdate && (
+          <p className="mt-2 text-xs px-6 text-red-300">
+            {errors.birthdate?.message as ReactNode}
+          </p>
+        )}
+      </div>
     </>
   );
 }
